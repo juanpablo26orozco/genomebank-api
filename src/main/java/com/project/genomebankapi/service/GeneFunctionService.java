@@ -21,7 +21,7 @@ public class GeneFunctionService {
      *  Listar relaciones por ID del gen.
      */
     public List<GeneFunction> listarPorGen(Integer geneId) {
-        return repository.findByGene_Id(Long.valueOf(geneId));
+        return repository.findByGen_Id(geneId);
     }
 
     /**
@@ -35,6 +35,6 @@ public class GeneFunctionService {
      *  Eliminar una relación por ID.
      */
     public void eliminar(Integer id) {
-        repository.deleteById(Long.valueOf(id));
+        repository.deleteById(id);
     }
 }

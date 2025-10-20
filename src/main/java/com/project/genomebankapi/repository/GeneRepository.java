@@ -9,8 +9,6 @@ import java.util.List;
  */
 public interface GeneRepository extends JpaRepository<Gene, Integer> {
 
-    /**
-     * ✅ Busca genes por el ID de su función asociada.
-     */
+
     List<Gene> findByFuncionId(Integer funcionId);
 }
