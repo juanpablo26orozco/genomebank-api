@@ -5,9 +5,11 @@ import com.project.genomebankapi.repository.GeneRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Servicio para la gestión de Genes.
+ * Realiza las operaciones de negocio y validación sobre la entidad Gene.
  */
 @Service
 public class GeneService {
@@ -26,10 +28,20 @@ public class GeneService {
     }
 
     /**
-     * ✅ Listar genes filtrados por función.
+     * ✅ Listar genes filtrados por cromosoma.
+     * @param cromosomaId ID del cromosoma asociado.
      */
-    public List<Gene> listarPorFuncion(Integer funcionId) {
-        return repository.findByFuncionId(funcionId);
+    public List<Gene> listarPorCromosoma(Integer cromosomaId) {
+        return repository.findByCromosomaId(cromosomaId);
+    }
+
+    /**
+     * ✅ Obtener un gen por su ID.
+     * @param id ID del gen
+     * @return Gene encontrado o null si no existe.
+     */
+    public Gene obtener(Integer id) {
+        return repository.findById(id).orElse(null);
     }
 
     /**
@@ -40,28 +52,24 @@ public class GeneService {
     }
 
     /**
-     * ✅ Obtener un gen por su ID.
-     */
-    public Gene obtener(Integer id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    /**
      * ✅ Actualizar un gen existente.
      */
     public Gene actualizar(Integer id, Gene g) {
-        Gene existente = repository.findById(id).orElseThrow();
+        Optional<Gene> opt = repository.findById(id);
+        if (opt.isEmpty()) {
+            throw new IllegalArgumentException("No se encontró el gen con ID: " + id);
+        }
 
+        Gene existente = opt.get();
         existente.setSimbolo(g.getSimbolo());
         existente.setPosInicio(g.getPosInicio());
         existente.setPosFinal(g.getPosFinal());
-        existente.setOrientacion(g.getOrientacion()); // ← 🔧 cambio aquí
+        existente.setOrientacion(g.getOrientacion());
         existente.setSecuencia(g.getSecuencia());
-        existente.setFuncion(g.getFuncion());
+        existente.setCromosoma(g.getCromosoma()); // 🔄 cambio clave aquí
 
         return repository.save(existente);
     }
-
 
     /**
      * ✅ Eliminar un gen por su ID.
@@ -70,9 +78,10 @@ public class GeneService {
         repository.deleteById(id);
     }
 
-
+    /**
+     * ✅ Alias de obtener(), por compatibilidad.
+     */
     public Gene obtenerPorId(Integer id) {
         return obtener(id);
     }
-
 }

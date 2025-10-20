@@ -20,22 +20,13 @@ public class SpeciesController {
         this.service = service;
     }
 
-    /**
-     * Listar todas las especies o filtrar por genoma.
-     * Ejemplo: /species?genomeId=1
-     */
+    //  Listar todas las especies
     @GetMapping
-    public List<Species> listar(@RequestParam(required = false) Integer genomeId) {
-        if (genomeId == null) {
-            return service.listar();
-        } else {
-            return service.listarPorGenome(genomeId);
-        }
+    public List<Species> listar() {
+        return service.listar();
     }
 
-    /**
-     * Obtener una especie por su ID.
-     */
+    //  Obtener especie por ID
     @GetMapping("/{id}")
     public ResponseEntity<Species> obtener(@PathVariable Integer id) {
         Species s = service.obtener(id);
@@ -43,27 +34,21 @@ public class SpeciesController {
         return ResponseEntity.ok(s);
     }
 
-    /**
-     * Crear una nueva especie.
-     */
+    //  Crear nueva especie
     @PostMapping
     public ResponseEntity<Species> crear(@RequestBody Species s) {
         Species nueva = service.crear(s);
         return ResponseEntity.ok(nueva);
     }
 
-    /**
-     * Actualizar una especie existente.
-     */
+    //  Actualizar especie
     @PutMapping("/{id}")
     public ResponseEntity<Species> actualizar(@PathVariable Integer id, @RequestBody Species s) {
         Species actualizada = service.actualizar(id, s);
         return ResponseEntity.ok(actualizada);
     }
 
-    /**
-     * Eliminar una especie por su ID.
-     */
+    //  Eliminar especie
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         service.eliminar(id);

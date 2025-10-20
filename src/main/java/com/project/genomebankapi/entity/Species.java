@@ -3,10 +3,11 @@ package com.project.genomebankapi.entity;
 import jakarta.persistence.*;
 
 /**
- * Entidad Species: representa una especie biológica asociada a un genoma.
+ * Entidad Species: representa una especie biológica registrada en el sistema.
+ * Tabla en BD: especie
  */
 @Entity
-@Table(name = "species")
+@Table(name = "especie")
 public class Species {
 
     @Id
@@ -19,23 +20,30 @@ public class Species {
     @Column(name = "nombreComun", length = 255)
     private String nombreComun;
 
-    // 🔗 Relación muchos-a-uno con Genome (según FK en tu BD)
-    @ManyToOne
-    @JoinColumn(name = "genoma_id", nullable = false)
-    private Genome genome;
-
     public Species() {}
 
-    // Getters y setters
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
+    // 🧩 Getters y Setters
+    public Integer getId() {
+        return id;
+    }
 
-    public String getNombreCientifico() { return nombreCientifico; }
-    public void setNombreCientifico(String nombreCientifico) { this.nombreCientifico = nombreCientifico; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-    public String getNombreComun() { return nombreComun; }
-    public void setNombreComun(String nombreComun) { this.nombreComun = nombreComun; }
+    public String getNombreCientifico() {
+        return nombreCientifico;
+    }
 
-    public Genome getGenome() { return genome; }
-    public void setGenome(Genome genome) { this.genome = genome; }
+    public void setNombreCientifico(String nombreCientifico) {
+        this.nombreCientifico = nombreCientifico;
+    }
+
+    public String getNombreComun() {
+        return nombreComun;
+    }
+
+    public void setNombreComun(String nombreComun) {
+        this.nombreComun = nombreComun;
+    }
 }

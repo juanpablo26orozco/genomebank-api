@@ -3,23 +3,24 @@ package com.project.genomebankapi.entity;
 import jakarta.persistence.*;
 
 /**
- * Entidad Genome: representa un genoma vinculado a un cromosoma.
- * Tabla: genomes
- * Campos: id (PK), cromosoma_id (FK)
+ * Entidad Genome: representa un genoma vinculado a una especie.
+ * Tabla: genoma
+ * Campos: id (PK), especie_id (FK)
  */
 @Entity
-@Table(name = "genomes")
+@Table(name = "genoma")
 public class Genome {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // FK hacia la tabla chromosomes
+    // FK hacia la tabla species
     @ManyToOne
-    @JoinColumn(name = "cromosoma_id", nullable = false)
-    private Chromosome chromosome;
+    @JoinColumn(name = "especie_id", nullable = false)
+    private Species species;
 
+    // Constructor vacío
     public Genome() {}
 
     // Getters y Setters
@@ -31,12 +32,11 @@ public class Genome {
         this.id = id;
     }
 
-    public Chromosome getChromosome() {
-        return chromosome;
+    public Species getSpecies() {
+        return species;
     }
 
-    public void setChromosome(Chromosome chromosome) {
-        this.chromosome = chromosome;
+    public void setSpecies(Species species) {
+        this.species = species;
     }
 }
-

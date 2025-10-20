@@ -5,10 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repositorio para la entidad FunctionEntity.
- * Permite realizar operaciones CRUD sobre la tabla 'functions'.
+ * Repositorio JPA para la entidad FunctionEntity.
+ * Gestiona operaciones CRUD sobre la tabla 'funcion'.
+ *
+ * NOTA: La tabla en la base de datos se llama 'funcion', no 'functions'.
  */
 @Repository
 public interface FunctionRepository extends JpaRepository<FunctionEntity, Integer> {
-    // Se pueden agregar métodos personalizados si se necesitan más adelante.
+
+    /**
+     * Aquí se pueden agregar consultas personalizadas si se necesitan,
+     * por ejemplo: findByIdentificador(String identificador) o findByCategoria(String categoria)
+     */
 }

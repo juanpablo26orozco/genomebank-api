@@ -6,9 +6,13 @@ import java.util.List;
 
 /**
  * Repositorio para la entidad Gene.
+ * Proporciona operaciones CRUD y consultas personalizadas.
  */
 public interface GeneRepository extends JpaRepository<Gene, Integer> {
 
-
-    List<Gene> findByFuncionId(Integer funcionId);
+    /**
+     * 🔍 Buscar genes por el ID del cromosoma asociado.
+     * (Relación muchos-a-uno con Chromosome)
+     */
+    List<Gene> findByCromosomaId(Integer cromosomaId);
 }

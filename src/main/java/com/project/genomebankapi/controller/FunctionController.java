@@ -9,32 +9,37 @@ import java.util.List;
 
 /**
  * Controlador REST para la gestión de funciones biológicas.
+ * Permite operaciones CRUD sobre la entidad FunctionEntity.
  */
 @RestController
 @RequestMapping("/functions")
 public class FunctionController {
 
-    private final FunctionService service;
+    private final FunctionService functionService;
 
-    public FunctionController(FunctionService service) {
-        this.service = service;
+    // Constructor con inyección de dependencia
+    public FunctionController(FunctionService functionService) {
+        this.functionService = functionService;
     }
 
     /**
-     * 🔹 Listar todas las funciones biológicas.
+     * Listar todas las funciones biológicas.
+     * @return lista de FunctionEntity
      */
     @GetMapping
     public ResponseEntity<List<FunctionEntity>> listar() {
-        List<FunctionEntity> funciones = service.listar();
+        List<FunctionEntity> funciones = functionService.listar();
         return ResponseEntity.ok(funciones);
     }
 
     /**
-     * 🔹 Obtener una función biológica por su ID.
+     * Obtener una función biológica por su ID.
+     * @param id ID de la función
+     * @return FunctionEntity encontrada o 404 si no existe
      */
     @GetMapping("/{id}")
     public ResponseEntity<FunctionEntity> obtener(@PathVariable Integer id) {
-        FunctionEntity funcion = service.obtener(id);
+        FunctionEntity funcion = functionService.obtener(id);
         if (funcion == null) {
             return ResponseEntity.notFound().build();
         }
@@ -42,29 +47,36 @@ public class FunctionController {
     }
 
     /**
-     * 🔹 Crear una nueva función biológica.
+     * Crear una nueva función biológica.
+     * @param funcion FunctionEntity a crear
+     * @return FunctionEntity creada
      */
     @PostMapping
     public ResponseEntity<FunctionEntity> crear(@RequestBody FunctionEntity funcion) {
-        FunctionEntity creada = service.crear(funcion);
+        FunctionEntity creada = functionService.crear(funcion);
         return ResponseEntity.ok(creada);
     }
 
     /**
-     * 🔹 Actualizar una función biológica existente.
+     * Actualizar una función biológica existente.
+     * @param id ID de la función a actualizar
+     * @param funcion FunctionEntity con los datos actualizados
+     * @return FunctionEntity actualizada
      */
     @PutMapping("/{id}")
     public ResponseEntity<FunctionEntity> actualizar(@PathVariable Integer id, @RequestBody FunctionEntity funcion) {
-        FunctionEntity actualizada = service.actualizar(id, funcion);
+        FunctionEntity actualizada = functionService.actualizar(id, funcion);
         return ResponseEntity.ok(actualizada);
     }
 
     /**
-     * 🔹 Eliminar una función biológica por su ID.
+     * Eliminar una función biológica por su ID.
+     * @param id ID de la función
+     * @return ResponseEntity sin contenido
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        service.eliminar(id);
+        functionService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 }

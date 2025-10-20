@@ -22,18 +22,20 @@ public class GeneController {
     }
 
     /**
-     * ✅ Listar todos los genes o filtrar por función si se pasa funcionId.
+     * ✅ Listar todos los genes o filtrar por cromosoma si se pasa cromosomaId.
+     * Ejemplo: GET /genes?cromosomaId=2
      */
     @GetMapping
-    public List<Gene> listar(@RequestParam(required = false) Integer funcionId) {
-        if (funcionId == null) {
+    public List<Gene> listar(@RequestParam(required = false) Integer cromosomaId) {
+        if (cromosomaId == null) {
             return service.listar();
         }
-        return service.listarPorFuncion(funcionId);
+        return service.listarPorCromosoma(cromosomaId);
     }
 
     /**
      * ✅ Obtener un gen por su ID.
+     * Ejemplo: GET /genes/5
      */
     @GetMapping("/{id}")
     public ResponseEntity<Gene> obtener(@PathVariable Integer id) {
@@ -46,6 +48,7 @@ public class GeneController {
 
     /**
      * ✅ Crear un nuevo gen.
+     * Ejemplo: POST /genes
      */
     @PostMapping
     public ResponseEntity<Gene> crear(@RequestBody Gene g) {
@@ -55,6 +58,7 @@ public class GeneController {
 
     /**
      * ✅ Actualizar un gen existente por su ID.
+     * Ejemplo: PUT /genes/5
      */
     @PutMapping("/{id}")
     public ResponseEntity<Gene> actualizar(@PathVariable Integer id, @RequestBody Gene g) {
@@ -64,6 +68,7 @@ public class GeneController {
 
     /**
      * ✅ Eliminar un gen por su ID.
+     * Ejemplo: DELETE /genes/5
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {

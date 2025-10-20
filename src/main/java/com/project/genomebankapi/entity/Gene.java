@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 
 /**
  * Entidad Gene: representa un gen con su posición, orientación y secuencia.
- * Tabla: genes
+ * Tabla: gen
  */
 @Entity
-@Table(name = "genes")
+@Table(name = "gen")
 public class Gene {
 
     @Id
@@ -17,10 +17,10 @@ public class Gene {
     @Column(name = "simbolo", length = 5, nullable = false)
     private String simbolo;
 
-    @Column(name = "posInicio", columnDefinition = "CHAR(1)", nullable = false)
+    @Column(name = "posInicio", nullable = false)
     private String posInicio;
 
-    @Column(name = "posFinal", columnDefinition = "CHAR(1)", nullable = false)
+    @Column(name = "posFinal", nullable = false)
     private String posFinal;
 
     @Column(name = "orientacion", nullable = false)
@@ -30,14 +30,19 @@ public class Gene {
     @Column(name = "secuencia", nullable = false, columnDefinition = "TEXT")
     private String secuencia;
 
-    // 🔗 Relación muchos-a-uno con la tabla GeneFunction
+    // 🔗 Relación muchos-a-uno con la tabla Chromosome
     @ManyToOne
-    @JoinColumn(name = "funcionId", nullable = false)
-    private GeneFunction funcion;
+    @JoinColumn(name = "cromosoma_id", nullable = false)
+    private Chromosome cromosoma;
 
+    // ==============================
+    // 🧬 Constructores
+    // ==============================
     public Gene() {}
 
-    // Getters y Setters
+    // ==============================
+    // ⚙️ Getters y Setters
+    // ==============================
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -56,6 +61,6 @@ public class Gene {
     public String getSecuencia() { return secuencia; }
     public void setSecuencia(String secuencia) { this.secuencia = secuencia; }
 
-    public GeneFunction getFuncion() { return funcion; }
-    public void setFuncion(GeneFunction funcion) { this.funcion = funcion; }
+    public Chromosome getCromosoma() { return cromosoma; }
+    public void setCromosoma(Chromosome cromosoma) { this.cromosoma = cromosoma; }
 }

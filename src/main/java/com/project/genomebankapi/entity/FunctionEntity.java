@@ -3,10 +3,12 @@ package com.project.genomebankapi.entity;
 import jakarta.persistence.*;
 
 /**
- * Entidad FunctionEntity: representa una función biológica con su identificador, nombre y categoría.
+ * Entidad FunctionEntity: representa una función biológica.
+ * Tabla: funcion
+ * Campos: id (PK), identificador, nombre, categoria (nullable)
  */
 @Entity
-@Table(name = "functions")
+@Table(name = "funcion")
 public class FunctionEntity {
 
     @Id
@@ -19,7 +21,7 @@ public class FunctionEntity {
     @Column(name = "nombre", length = 255, nullable = false)
     private String nombre;
 
-    @Column(name = "categoria", length = 2, nullable = false)
+    @Column(name = "categoria", length = 2, nullable = true) // Ahora nullable
     private String categoria;
 
     public FunctionEntity() {}
