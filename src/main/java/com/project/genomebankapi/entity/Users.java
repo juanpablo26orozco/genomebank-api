@@ -20,7 +20,7 @@ public class Users {
     @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
 
-    @Column(name = "contra_hashed", nullable = false, length = 255)
+    @Column(name = "contraHashed", nullable = false, length = 255)
     private String contraHashed;
 
     //  Relación muchos-a-uno con Rol
