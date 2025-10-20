@@ -39,3 +39,4 @@ public class Genome {
         this.chromosome = chromosome;
     }
 }
+

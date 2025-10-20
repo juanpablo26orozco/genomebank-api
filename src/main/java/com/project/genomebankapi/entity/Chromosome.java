@@ -34,3 +34,4 @@ public class Chromosome {
     public Gene getGene() { return gene; }
     public void setGene(Gene gene) { this.gene = gene; }
 }
+
