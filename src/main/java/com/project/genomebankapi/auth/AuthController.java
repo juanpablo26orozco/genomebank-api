@@ -12,10 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Controlador para la autenticación y registro de usuarios.
@@ -45,9 +44,13 @@ public class AuthController {
         Users user = usersRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
-        List<String> roles = user.getRol() != null
-                ? List.of(user.getRol().getNombreRol())
-                : List.of("USER");
+        // ✅ Manejo seguro de roles
+        List<String> roles = new ArrayList<>();
+        if (user.getRol() != null && user.getRol().getNombreRol() != null) {
+            roles.add(user.getRol().getNombreRol());
+        } else {
+            roles.add("USER");
+        }
 
         String token = jwt.generate(user.getEmail(), roles);
 
@@ -91,7 +94,14 @@ public class AuthController {
 
         usersRepository.save(user);
 
-        List<String> roles = List.of(user.getRol().getNombreRol());
+        // ✅ También manejo seguro aquí
+        List<String> roles = new ArrayList<>();
+        if (user.getRol() != null && user.getRol().getNombreRol() != null) {
+            roles.add(user.getRol().getNombreRol());
+        } else {
+            roles.add("USER");
+        }
+
         String token = jwt.generate(user.getEmail(), roles);
 
         return Map.of(
