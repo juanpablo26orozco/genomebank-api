@@ -17,10 +17,10 @@ public class Gene {
     @Column(name = "simbolo", length = 5, nullable = false)
     private String simbolo;
 
-    @Column(name = "posInicio", nullable = false)
+    @Column(name = "pos_inicio", nullable = false)
     private String posInicio;
 
-    @Column(name = "posFinal", nullable = false)
+    @Column(name = "pos_final", nullable = false)
     private String posFinal;
 
     @Column(name = "orientacion", nullable = false)

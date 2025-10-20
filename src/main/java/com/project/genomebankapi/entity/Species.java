@@ -14,10 +14,10 @@ public class Species {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nombreCientifico", length = 255, nullable = false, unique = true)
+    @Column(name = "nombre_cientifico", length = 255, nullable = false, unique = true)
     private String nombreCientifico;
 
-    @Column(name = "nombreComun", length = 255)
+    @Column(name = "nombre_comun", length = 255)
     private String nombreComun;
 
     public Species() {}

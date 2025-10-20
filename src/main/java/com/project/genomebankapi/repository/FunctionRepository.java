@@ -13,8 +13,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FunctionRepository extends JpaRepository<FunctionEntity, Integer> {
 
-    /**
-     * Aquí se pueden agregar consultas personalizadas si se necesitan,
-     * por ejemplo: findByIdentificador(String identificador) o findByCategoria(String categoria)
-     */
+
 }

@@ -9,10 +9,5 @@ import java.util.List;
  * Proporciona operaciones CRUD y consultas personalizadas.
  */
 public interface GeneRepository extends JpaRepository<Gene, Integer> {
-
-    /**
-     * 🔍 Buscar genes por el ID del cromosoma asociado.
-     * (Relación muchos-a-uno con Chromosome)
-     */
     List<Gene> findByCromosomaId(Integer cromosomaId);
 }
